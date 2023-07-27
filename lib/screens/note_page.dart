@@ -74,6 +74,7 @@ class _NotesPageState extends State<NotesPage> {
       );
 
   Widget buildNotes() => LiquidPullToRefresh(
+        springAnimationDurationInMilliseconds: 1500,
         onRefresh: refreshNotes,
         height: 300,
         color: Colors.deepPurple,
