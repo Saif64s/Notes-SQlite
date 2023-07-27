@@ -43,6 +43,7 @@ class _NotesPageState extends State<NotesPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
           title: const Text(
             'N  O  T  E  S',

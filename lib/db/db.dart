@@ -18,6 +18,7 @@ class NotesDatabase {
     return _database!;
   }
 
+  // Initilized the Database.
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
@@ -25,6 +26,7 @@ class NotesDatabase {
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
+  // creating the table
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const textType = 'TEXT NOT NULL';
@@ -43,6 +45,7 @@ CREATE TABLE $tableNotes (
 ''');
   }
 
+  // POST request
   Future<Note> create(Note note) async {
     final db = await instance.database;
 
@@ -50,6 +53,7 @@ CREATE TABLE $tableNotes (
     return note.copy(id: id);
   }
 
+  // GET request to get one item
   Future<Note> readNote(int id) async {
     final db = await instance.database;
 
@@ -67,6 +71,7 @@ CREATE TABLE $tableNotes (
     }
   }
 
+  // GET request to get list of all items
   Future<List<Note>> readAllNotes() async {
     final db = await instance.database;
 
@@ -79,6 +84,7 @@ CREATE TABLE $tableNotes (
     return result.map((json) => Note.fromJson(json)).toList();
   }
 
+  // PUT or UPDATE request
   Future<int> update(Note note) async {
     final db = await instance.database;
 
@@ -90,6 +96,7 @@ CREATE TABLE $tableNotes (
     );
   }
 
+  // DELETE request
   Future<int> delete(int id) async {
     final db = await instance.database;
 
@@ -100,6 +107,7 @@ CREATE TABLE $tableNotes (
     );
   }
 
+  // Closes the db so that other instatnces can not use this
   Future close() async {
     final db = await instance.database;
 
